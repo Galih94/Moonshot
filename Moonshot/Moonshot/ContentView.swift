@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Image(.example)
-            .resizable()
-            .scaledToFit()
-            .containerRelativeFrame(.horizontal) { size, axis in
-                size * 0.5
+        ScrollView {
+            VStack(spacing: 10) {
+                ForEach(0..<100, id: \.self) { index in
+                    Text("No. \(index)")
+                }
             }
+        }
     }
 }
 
