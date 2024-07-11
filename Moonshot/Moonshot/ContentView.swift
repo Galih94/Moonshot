@@ -23,7 +23,7 @@ struct CustomText: View {
 struct ContentView: View {
     var body: some View {
         ScrollView {
-            VStack(spacing: 10) {
+            LazyVStack(spacing: 10) {
                 ForEach(0..<100, id: \.self) { index in
                     CustomText("No. \(index)")
                 }
