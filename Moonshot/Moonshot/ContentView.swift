@@ -31,9 +31,7 @@ struct User: Codable {
 
 struct ContentView: View {
     let layout = [
-        GridItem(.fixed(80)),
-        GridItem(.fixed(80)),
-        GridItem(.fixed(80))
+        GridItem(.adaptive(minimum: 70)),
     ]
     
     var body: some View {
