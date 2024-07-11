@@ -15,20 +15,17 @@ struct CustomText: View {
     }
     
     init(_ text: String) {
-        print("Creating new text: \(text)")
         self.text = text
     }
 }
 
 struct ContentView: View {
     var body: some View {
-        ScrollView(.horizontal) {
-            LazyHStack(spacing: 10) {
-                ForEach(0..<100, id: \.self) { index in
-                    CustomText("No. \(index)")
-                }
+        NavigationStack {
+            NavigationLink("Tap me") {
+                Text("Detail")
             }
-            .frame(maxHeight: .infinity)
+            .navigationTitle("SwiftUI")
         }
     }
 }
