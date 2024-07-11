@@ -22,13 +22,13 @@ struct CustomText: View {
 
 struct ContentView: View {
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 10) {
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 10) {
                 ForEach(0..<100, id: \.self) { index in
                     CustomText("No. \(index)")
                 }
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxHeight: .infinity)
         }
     }
 }
