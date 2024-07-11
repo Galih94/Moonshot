@@ -19,15 +19,36 @@ struct CustomText: View {
     }
 }
 
+struct Address: Codable {
+    let street: String
+    let city: String
+}
+
+struct User: Codable {
+    let name: String
+    let address: Address
+}
+
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
-            List(0..<100) { row in
-                NavigationLink("Row \(row)") {
-                    Text("Detail row \(row)")
+        Button("Decode JSON") {
+            let inputJSON = """
+            {
+                "name": "Galih Samodra",
+                "address": {
+                    "street": "Krakatau 4",
+                    "city": "Tangsel"
                 }
             }
-            .navigationTitle("SwiftUI")
+            """
+            printUserData(from: inputJSON)
+        }
+    }
+    
+    private func printUserData(from input: String) {
+        let data = Data(input.utf8)
+        if let user = try? JSONDecoder().decode(User.self, from: data) {
+            print("user \(user.name) lives in \(user.address.street), \(user.address.city)")
         }
     }
 }
