@@ -22,13 +22,9 @@ struct CustomText: View {
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            NavigationLink {
-                Text("Detail")
-            } label: {
-                VStack {
-                    Text("Thsi is label")
-                    Text("So is this is")
-                    Image(systemName: "face.smiling")
+            List(0..<100) { row in
+                NavigationLink("Row \(row)") {
+                    Text("Detail row \(row)")
                 }
             }
             .navigationTitle("SwiftUI")
