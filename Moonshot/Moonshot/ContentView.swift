@@ -30,25 +30,19 @@ struct User: Codable {
 }
 
 struct ContentView: View {
+    let layout = [
+        GridItem(.fixed(80)),
+        GridItem(.fixed(80)),
+        GridItem(.fixed(80))
+    ]
+    
     var body: some View {
-        Button("Decode JSON") {
-            let inputJSON = """
-            {
-                "name": "Galih Samodra",
-                "address": {
-                    "street": "Krakatau 4",
-                    "city": "Tangsel"
+        ScrollView {
+            LazyVGrid(columns: layout) {
+                ForEach(0..<300) { index in
+                    Text("Item \(index)")
                 }
             }
-            """
-            printUserData(from: inputJSON)
-        }
-    }
-    
-    private func printUserData(from input: String) {
-        let data = Data(input.utf8)
-        if let user = try? JSONDecoder().decode(User.self, from: data) {
-            print("user \(user.name) lives in \(user.address.street), \(user.address.city)")
         }
     }
 }
