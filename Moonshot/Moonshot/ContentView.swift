@@ -15,6 +15,7 @@ struct ContentView: View {
                     Text("No. \(index)")
                 }
             }
+            .frame(maxWidth: .infinity)
         }
     }
 }
