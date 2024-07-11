@@ -22,8 +22,14 @@ struct CustomText: View {
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            NavigationLink("Tap me") {
+            NavigationLink {
                 Text("Detail")
+            } label: {
+                VStack {
+                    Text("Thsi is label")
+                    Text("So is this is")
+                    Image(systemName: "face.smiling")
+                }
             }
             .navigationTitle("SwiftUI")
         }
