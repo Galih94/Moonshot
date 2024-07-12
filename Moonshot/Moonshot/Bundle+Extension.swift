@@ -18,8 +18,13 @@ extension Bundle {
             fatalError("Failed to get data from \(url)")
         }
         
+        let decoder = JSONDecoder()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "y-MM-dd"
+        decoder.dateDecodingStrategy = .formatted(formatter)
+        
         do {
-            let loadedData = try JSONDecoder().decode(T.self, from: data)
+            let loadedData = try decoder.decode(T.self, from: data)
             return loadedData
         } catch DecodingError.keyNotFound(let key, let context){
             fatalError("Failed due to key \(key.stringValue) not found - \(context.debugDescription)")
