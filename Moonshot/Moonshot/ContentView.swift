@@ -12,7 +12,7 @@ struct ContentView: View {
     let missions: [Mission] = Bundle.main.decode("missions.json")
     
     let layout = [
-        GridItem(.fixed(150))
+        GridItem(.adaptive(minimum: 150))
     ]
     
     var body: some View {
