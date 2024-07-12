@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    let astronaus = Bundle.main.decode("astronauts.json")
+    let astronaus: [String: Astronaut] = Bundle.main.decode("astronauts.json")
     
     var body: some View {
-        ScrollView {   
+        ScrollView {
             VStack {
                 Text("print \(astronaus)")
             }

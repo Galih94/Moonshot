@@ -9,7 +9,7 @@ import Foundation
 
 
 extension Bundle {
-    func decode(_ file: String) -> [String: Astronaut] {
+    func decode<T: Codable>(_ file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else {
             fatalError("Failed to locate \(file) in bundle")
         }
@@ -19,7 +19,7 @@ extension Bundle {
         }
         
         do {
-            let loadedData = try JSONDecoder().decode([String: Astronaut].self, from: data)
+            let loadedData = try JSONDecoder().decode(T.self, from: data)
             return loadedData
         } catch DecodingError.keyNotFound(let key, let context){
             fatalError("Failed due to key \(key.stringValue) not found - \(context.debugDescription)")
