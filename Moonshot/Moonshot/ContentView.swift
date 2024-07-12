@@ -11,14 +11,34 @@ struct ContentView: View {
     let astronaus: [String: Astronaut] = Bundle.main.decode("astronauts.json")
     let missions: [Mission] = Bundle.main.decode("missions.json")
     
+    let layout = [
+        GridItem(.fixed(150))
+    ]
+    
     var body: some View {
-        ScrollView {
-            VStack {
-                Text("print \(astronaus)")
-            }
-            Spacer()
-            VStack {
-                Text("print \(missions)")
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: layout) {
+                    ForEach(missions) { mission in
+                        NavigationLink {
+                            Text("Detail view mission \(mission.displayName)")
+                        } label: {
+                            VStack {
+                                Image(mission.image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 100)
+                                VStack {
+                                    Text(mission.displayName)
+                                        .font(.headline)
+                                    Text(mission.launchDate ?? "N/A")
+                                        .font(.caption)
+                                }
+                                .frame(maxWidth: .infinity)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
