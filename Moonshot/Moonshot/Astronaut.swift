@@ -23,10 +23,19 @@ extension Bundle {
             fatalError("Failed to get data from \(url)")
         }
         
-        guard let loadedData = try? JSONDecoder().decode([String: Astronaut].self, from: data) else {
-            fatalError("Failed to decode data from \(url)")
+        do {
+            let loadedData = try JSONDecoder().decode([String: Astronaut].self, from: data)
+            return loadedData
+        } catch DecodingError.keyNotFound(let key, let context){
+            fatalError("Failed due to key \(key.stringValue) not found - \(context.debugDescription)")
+        } catch DecodingError.typeMismatch(let type, let context){
+            fatalError("Failed due to type \(type.self) mismatch - \(context.debugDescription)")
+        } catch DecodingError.valueNotFound(let value, let context){
+            fatalError("Failed due to value \(value.self) not found - \(context.debugDescription)")
+        } catch DecodingError.dataCorrupted(let context){
+            fatalError("Failed due to data corrupted - \(context.debugDescription)")
+        } catch {
+            fatalError("Failed to decode \(file) from bundle \(error.localizedDescription)")
         }
-        
-        return loadedData
     }
 }
