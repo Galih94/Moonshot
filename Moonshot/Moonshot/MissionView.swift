@@ -75,6 +75,16 @@ struct MissionView: View {
                     }
                     .padding(.top)
                 CustomDividerView()
+                VStack(alignment: .leading) {
+                    Text("Launch Date")
+                        .font(.title.bold())
+                    Text(mission.formattedLaunchDate)
+                        .font(.headline.bold())
+                        .padding(.bottom, 5)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                CustomDividerView()
                 VStack {
                     Text("Crew")
                         .font(.title.bold())
