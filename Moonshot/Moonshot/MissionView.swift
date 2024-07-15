@@ -8,7 +8,19 @@
 import SwiftUI
 
 struct MissionView: View {
+    let crewMember: [CrewMember]
     let mission: Mission
+    init(mission: Mission, astronauts: [String: Astronaut]) {
+        self.mission = mission
+        self.crewMember = mission.crew.map{ member in
+            if let astronaut = astronauts[member.name] {
+                
+                return CrewMember(role: member.role, astronaut: astronaut)
+            }
+            fatalError("missing \(member.name)")
+        }
+    }
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -38,5 +50,6 @@ struct MissionView: View {
 
 #Preview {
     let mission: [Mission] = Bundle.main.decode("missions.json")
-    return MissionView(mission: mission[3]).preferredColorScheme(.dark)
+    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
+    return MissionView(mission: mission[3], astronauts: astronauts).preferredColorScheme(.dark)
 }

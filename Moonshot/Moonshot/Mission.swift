@@ -8,6 +8,11 @@
 import Foundation
 
 
+struct CrewMember {
+    let role: String
+    let astronaut: Astronaut
+}
+
 struct Mission: Codable, Identifiable {
     struct CrewRole: Codable {
         let name: String
