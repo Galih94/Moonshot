@@ -37,5 +37,6 @@ struct MissionView: View {
 }
 
 #Preview {
-    MissionView(mission: Mission(id: 10, launchDate: Date(), crew: [Mission.CrewRole(name: "stafford", role: "Commander")], description: "Apollo 10 was a May 1969 human spaceflight, the fourth crewed mission in the United States Apollo program, and the second (after Apollo 8) to orbit the Moon.\n\nIt was the F mission: a \"dress rehearsal\" for the first Moon landing, testing all of the components and procedures, just short of actually landing. The Apollo Lunar Module (LM) was flown to a descent orbit within 8.4 nautical miles (15.6 km) of the lunar surface, at the point where powered descent for landing would normally begin.\n\nAfter orbiting the Moon 31 times Apollo 10 returned safely to Earth, and its success enabled the first landing to be attempted on the Apollo 11 mission two months later."))
+    let mission: [Mission] = Bundle.main.decode("missions.json")
+    return MissionView(mission: mission[3]).preferredColorScheme(.dark)
 }
