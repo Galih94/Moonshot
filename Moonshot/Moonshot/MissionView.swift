@@ -7,6 +7,41 @@
 
 import SwiftUI
 
+struct MissionCrewMemberView: View {
+    let crewMember: [CrewMember]
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(crewMember, id: \.role) { crew in
+                    NavigationLink {
+                        Text("Astronaut Details")
+                    } label: {
+                        HStack {
+                            Image(crew.astronaut.id)
+                                .resizable()
+                                .frame(width: 104, height: 72)
+                                .clipShape(.capsule)
+                                .overlay {
+                                    Capsule()
+                                        .strokeBorder(.white, lineWidth: 1)
+                                }
+                            VStack(alignment: .leading) {
+                                Text(crew.astronaut.name)
+                                    .foregroundStyle(.white)
+                                    .font(.headline)
+                                Text(crew.role)
+                                    .foregroundStyle(.white.opacity(0.5))
+                                
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                }
+            }
+        }
+    }
+}
+
 struct MissionView: View {
     let crewMember: [CrewMember]
     let mission: Mission
@@ -31,6 +66,7 @@ struct MissionView: View {
                         width * 0.6
                     }
                     .padding(.top)
+                MissionCrewMemberView(crewMember: crewMember)
                 VStack(alignment: .leading) {
                     Text("Mission Highlights")
                         .font(.title.bold())
