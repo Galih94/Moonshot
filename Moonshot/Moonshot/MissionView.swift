@@ -45,6 +45,7 @@ struct MissionCrewMemberView: View {
                     }
                 }
             }
+            .padding(.horizontal)
         }
     }
 }
@@ -74,13 +75,14 @@ struct MissionView: View {
                     }
                     .padding(.top)
                 CustomDividerView()
-                VStack(alignment: .leading) {
+                VStack {
                     Text("Crew")
                         .font(.title.bold())
                         .padding(.bottom, 5)
-                    MissionCrewMemberView(crewMember: crewMember)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
+                MissionCrewMemberView(crewMember: crewMember)
                 CustomDividerView()
                 VStack(alignment: .leading) {
                     Text("Mission Highlights")
