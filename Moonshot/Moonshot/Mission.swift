@@ -13,8 +13,12 @@ struct CrewMember {
     let astronaut: Astronaut
 }
 
-struct Mission: Codable, Identifiable {
-    struct CrewRole: Codable {
+struct Mission: Codable, Identifiable, Hashable {
+    static func == (lhs: Mission, rhs: Mission) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    struct CrewRole: Codable, Hashable {
         let name: String
         let role: String
     }

@@ -14,9 +14,7 @@ struct CustomGridMissionView: View {
     var body: some View {
         LazyVGrid(columns: layout) {
             ForEach(missions) { mission in
-                NavigationLink {
-                    MissionView(mission: mission, astronauts: astronaus)
-                } label: {
+                NavigationLink(value: mission) {
                     VStack {
                         Image(mission.image)
                             .resizable()
@@ -41,6 +39,9 @@ struct CustomGridMissionView: View {
                             .stroke(.lightBackground)
                     }
                 }
+                .navigationDestination(for: Mission.self, destination: { selectedMission in
+                    MissionView(mission: selectedMission, astronauts: astronaus)
+                })
             }
         }
         .padding([.horizontal, .bottom])
@@ -54,9 +55,7 @@ struct CustomListMissionView: View {
     let astronaus: [String: Astronaut]
     var body: some View {
             ForEach(missions) { mission in
-                NavigationLink {
-                    MissionView(mission: mission, astronauts: astronaus)
-                } label: {
+                NavigationLink(value: mission) {
                     HStack() {
                         Image(mission.image)
                             .resizable()
@@ -83,18 +82,21 @@ struct CustomListMissionView: View {
                     .padding(.horizontal)
                 }
                 .frame(maxWidth: .infinity)
+                .navigationDestination(for: Mission.self, destination: { selectedMission in
+                    MissionView(mission: selectedMission, astronauts: astronaus)
+                })
         }
         
     }
 }
 
 struct ContentView: View {
-    @State private var isShowingGrid: Bool = false
+    @State private var isShowingGrid: Bool = true
     let astronaus: [String: Astronaut] = Bundle.main.decode("astronauts.json")
     let missions: [Mission] = Bundle.main.decode("missions.json")
     
     let layout = [
-        GridItem(.adaptive(minimum: 150))
+        GridItem(.adaptive(minimum: 120))
     ]
     
     var body: some View {
