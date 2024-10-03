@@ -39,6 +39,7 @@ struct MissionCrewMemberView: View {
                                 Text(crew.role)
                                     .foregroundStyle(.white.opacity(0.5))
                             }
+                            .accessibilityLabel("\(crew.astronaut.name) \(crew.role)")
                         }
                     }
                     .navigationDestination(for: Astronaut.self, destination: { selectedCrew in
@@ -75,6 +76,7 @@ struct MissionView: View {
                         width * 0.6
                     }
                     .padding(.top)
+                    .accessibilityElement()
                 CustomDividerView()
                 VStack(alignment: .leading) {
                     Text("Launch Date")
@@ -85,6 +87,7 @@ struct MissionView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
+                .accessibilityLabel("Launch Date \(mission.formattedLaunchDate)")
                 CustomDividerView()
                 VStack {
                     Text("Crew")
@@ -100,9 +103,9 @@ struct MissionView: View {
                         .font(.title.bold())
                         .padding(.bottom, 5)
                     Text(mission.description)
-                    
                 }
                 .padding(.horizontal)
+                .accessibilityLabel("Mission Highlights \(mission.description)")
             }
             .padding(.bottom)
         }
